@@ -1,0 +1,34 @@
+Lake-v0:
+  trials: 1
+  episodes: 10000
+  discount: 1.0
+  exploration_rate: 1.0
+  exploration_rate_decay: 0.99
+  min_exploration_rate: 0.00
+  delta: 0.001
+  c: 0.0
+  lamb: 1.0
+  omega: 0.8
+  save: yes
+  save_dir: 'results'
+  plot: yes
+  smoothing: 0.05
+  iqr: 0.0
+
+Replacement-v0:
+  trials: 50
+  episodes: 62500
+  steps: 8
+  discount: 1.0
+  exploration_rate: 1.0
+  exploration_rate_decay: 0.9999
+  min_exploration_rate: 0.00
+  delta: 0.001
+  c: 0.001
+  lamb: 1.0
+  omega: 0.8
+  save: yes
+  save_dir: 'results'
+  plot: yes
+  smoothing: 0.05
+  iqr: 0.5
