@@ -5,7 +5,7 @@ import yaml
 
 def parse_args():
     """
-    parse the arguments
+    parse the command line arguments
     :return: (dict) the arguments
     """
     parser = argparse.ArgumentParser(description='Run UCB-H, UCB-H+, and Q-Learning agents in a given environment')

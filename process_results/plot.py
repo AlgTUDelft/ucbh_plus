@@ -57,7 +57,17 @@ def plot(data: Dict[str, np.ndarray],
          iqr: float = DEFAULT_INTERQUANTILE_RANGE,
          episodes: Optional[int] = None,
          solution: float = None):
-
+    """
+    Plots the data after it has been reshapen with fetch_stat
+    :param data: the data
+    :param title: Plot's title
+    :param colors: a list of colors for plotting
+    :param ma: moving average, must be at least 1
+    :param show_q: show quantile ranges?
+    :param iqr: which inter-quantile range to show
+    :param episodes: number of episodes
+    :param solution: the solution; plotted in dashed line
+    """
     if colors is None:
         colors = DEFAULT_COLORS
     agent_colors = {}

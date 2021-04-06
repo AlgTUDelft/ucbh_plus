@@ -8,6 +8,14 @@ def fetch_stat(
         episodes: int,
         trials: int,
 ) -> Dict[str, np.ndarray]:
+    """
+    reshapes the data for each agent into a numpy array and fills it with a single stat for plotting
+    :param data: a list of dictionaries with the experiment's data
+    :param stat: a stat to use in filling the arrays; all other stats will be discarded
+    :param episodes: number of episodes
+    :param trials: number of trials
+    :return: a dictionary of numpy arrays with a given stat for each agent
+    """
     result = {}
     for item in data:
         method = item['method']

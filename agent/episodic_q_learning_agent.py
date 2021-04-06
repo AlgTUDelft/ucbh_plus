@@ -15,7 +15,17 @@ class EpisodicQLearningAgent(DiscreteAgent):
 
     def __init__(self, env: tl.TimeLimit, policy=None, name=None, verb=0, discount=None,
                  starting_q=0.0, detect_terminals=True, learning_rate=None):
-
+        """
+        Simple episodic Q-learning agent
+        :param env: OpenAI Gym environment; must be gym.wrappers.time_limit.TimeLimit for episodic learning
+        :param policy: Learning policy, e.g., epsilon-greedy for Q-learning
+        :param name: Agent's name for displaying
+        :param verb: Verbosity
+        :param discount: Discounting factor
+        :param starting_q: starting Q-values
+        :param detect_terminals: Can the agent detect that the episode is terminated from the 'done' signal?
+        :param learning_rate: learning rate function
+        """
         super().__init__(env.unwrapped, policy, name, verb)
         self._env, self._unwrapped_env = env, env.unwrapped
         self._discount = DEFAULT_DISCOUNT if discount is None else discount

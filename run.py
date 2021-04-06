@@ -28,10 +28,34 @@ def run(
         smoothing: float = 0.05,
         iqr: float = 0.0
 ):
+    """
+    Runs three agents (UCB-H+, UCB, and Q-Learning) in a given environment
+    :param env: Environment: either an OpenAI Gym environment or a string;
+    in the latter case gym.make(env) will be used.
+    :param trials: Number of trials to run
+    :param episodes: Number of episodes in each trial
+    :param steps: Number of time steps per episode
+    :param discount: Discounting factor
+    :param starting_q: Initial Q-values for Q-Learning. UCB-H+ and UCB-H infer these from the environment
+    :param exploration_rate: Initial exploration rate for Q-Learning
+    :param exploration_rate_decay: Exploration rate decay for Q-Learning; each time step the exploration rate is
+    multiplied by this until it reaches the minimum exploration rate
+    :param min_exploration_rate: Minimum exploration rate for Q-Learning
+    :param delta: PAC-probability delta for UCB-H and UCB-H+
+    :param c: UCB-constant c for UCB-H and UCB-H+
+    :param lamb: lambda coefficient for UCB-H+; this is added to the numerator and demoninator of the learning rate
+    :param omega: power coefficient for UCB-H+
+    :param verbose: how much information to output to console: from 0 (None) to 4 (a lot of information)
+    :param save: whether to save the experiment data or not
+    :param save_dir: directory where the data will be saved
+    :param plot: whether to plot the experiment data or not
+    :param smoothing: moving-average smoothing relative to the number of episodes
+    :param iqr: inter-quantile range for plotting
+    """
     import agent
     import environment  # this is required for custom environments to show up in the OpenAI Gym registry
 
-    # Initialize the environment
+    # Initialize the environment an make it a TimeLimit environment for episodic learning
     if isinstance(env, str):
         env_name = env
         env = make(env_name)
@@ -46,6 +70,7 @@ def run(
         else:
             env._max_episode_steps = steps
 
+    # If verbosity is not given, use 0, i.e., no console output
     if verbose is None:
         verbose = 0
 
@@ -84,7 +109,7 @@ def run(
         )
     ]
 
-    # Run experiments
+    # Start the experiments
     if verbose >= 1:
         print(f'Starting environment {env_name}.\n')
     results = []
@@ -94,7 +119,7 @@ def run(
     if verbose >= 1:
         print(f'Value: {solution}.\n')
 
-    # Save the results to this directory
+    # Build a path to save directory
     path = os.path.join(save_dir, env_name, datetime.now().strftime('%Y-%m-%d-%H-%M')) if save else None
 
     # Run the trials

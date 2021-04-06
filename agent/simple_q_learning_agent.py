@@ -4,7 +4,7 @@ import numpy as np
 
 class SimpleQLearningAgent(EpisodicQLearningAgent):
 
-    def _learn(self, observation, action, next_observation, reward, done, info, **kwargs):
+    def _learn(self, observation, action, next_observation, reward, done, info):
         # if agent knows how to detect terminals, use zero Q-value for the next state value
         step = self._env._elapsed_steps - 1
         if done and self._detect_terminals:

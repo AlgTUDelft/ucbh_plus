@@ -22,6 +22,12 @@ class Policy:
 
 class EpsilonGreedyPolicy(Policy):
     def __init__(self, starting_epsilon: float = 1.0, epsilon_decay: float = 0.999, min_epsilon: float = 0.01):
+        """
+        Epsilon-greedy policy with decaying learning rate
+        :param starting_epsilon: Starting learning rate
+        :param epsilon_decay: Every step the learning rate is multiplied by this amount until it reaches the minimum
+        :param min_epsilon: Minimum learning rate
+        """
         super(EpsilonGreedyPolicy, self).__init__()
         self._eps0 = self._eps = starting_epsilon
         self._decay = epsilon_decay
